@@ -1,11 +1,12 @@
 <template>
   <div>
+    <h1>Register</h1>
     <form @submit.prevent="pressed">
       <input v-model="email" />
       <input v-model="password" />
       <button>Register</button>
     </form>
-    {{user.user.email}}
+    <p v-if="user">{{user.user.email}}</p>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 
 export default {
+  name: 'Register',
   data() {
     return {
       email: "",
@@ -29,7 +31,7 @@ export default {
           .createUserWithEmailAndPassword(this.email, this.password);
         //if register is successful send them to secret page
         this.user = user
-        // this.$router.replace('/');
+         this.$router.replace('/');
       } catch (err) {
         console.log(err);
       }
